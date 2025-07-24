@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Kics File Checker</title>
+        <script src="./file.js"></script>
+    </head>
+    <body>
+        <h1>Upload a .tgz File</h1>
+        <form id = "UploadForm"action="/upload" method="post" enctype="multipart/form-data">
+            <input type = "file" id="fileInput" name = "tgz_file" accept=".tgz" required>
+            <input type="submit" value="Upload">
+        </form>
+    </body>
+</html>
