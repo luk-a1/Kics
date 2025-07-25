@@ -1,1 +1,0 @@
-document.getElementById("fileInputs").innerHTML = "My First JavaScript";
