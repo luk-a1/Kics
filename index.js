@@ -1,16 +1,32 @@
-console.log(document.getElementById("uB"));
-console.log(document.getElementById("er"));
+const uploadButton = document.getElementById("uploadButton");
+const ErrorMsgP = document.getElementById("ErrorP");
+const fileInput = document.getElementById("fileInput");
+const Form = document.getElementById("UploadForm");
 
-const uploadButton =document.getElementById("uB");
-const ErrorMsgP = document.getElementById("er");
+fileInput.addEventListener('change', (event) => {
+    const file = event.target.files[0];
 
-uploadButton.addEventListener("onclick", upload);
+    ErrorMsgP.textContent = '';
 
-function upload(){
-    const file = document.getElementById("fileInputs");
-    const file_type = file.value.substring(file.lastIndexOf('.')+1, file.length) || file;
+    //const fileExtension = fileName.split('.').pop().toLowerCase();
 
-    if(file_type != "tgz"){
-        ErrorMsgP.innerHTML = "You can only upload .tgz file";
+    if (file) {
+        const fileName = file.name.toLowerCase();
+        if (!fileName.endsWith('.tgz')) {
+            ErrorMsgP.textContent = 'Error: Please upload a .tgz file.';
+            ErrorMsgP.style.color = 'red';
+            fileInput.value = '';
+        }
+      }
+/*
+    if (!fileName.endsWith(".tgz")) {
+        errorMsgP.innerhtm = "You can only upload .tgz files.";
+        errorMsgP.style.color = "red";
+        uploadButton.disabled = true;
+    } else {
+        errorMsgP.textContent = "File accepted!";
+        errorMsgP.style.color = "green";
+        uploadButton.disabled = false;  
     }
-}
+*/
+});

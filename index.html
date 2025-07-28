@@ -3,14 +3,14 @@
 <html>
     <head>
         <title>Kics File Checker</title>
-        <script src="./file.js" defer></script>
+        <script src="./index.js" defer></script>
     </head>
     <body>
         <h1>Upload a .tgz File</h1>
         <form id = "UploadForm" action="http://localhost:8000/upload/" method="post"  enctype="multipart/form-data"> <!-- action is used for the sending data to backend, -->
             <input type = "file" id="fileInput" name = "tgz_file" accept=".tgz" required>
-            <p id = "er"></p>
-            <input type="submit" id = "uB" value="Upload">
+            <p id = "ErrorP"></p>
+            <input type="submit" id = "uploadButton" value="Upload">
         </form>
     </body>
 </html>
