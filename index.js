@@ -1,3 +1,4 @@
+/*
 const uploadButton = document.getElementById("uploadButton");
 const ErrorMsgP = document.getElementById("ErrorP");
 const fileInput = document.getElementById("fileInput");
@@ -12,21 +13,11 @@ fileInput.addEventListener('change', (event) => {
 
     if (file) {
         const fileName = file.name.toLowerCase();
-        if (!fileName.endsWith('.tgz')) {
+        if (!fileName.endsWith('.tgz') || !fileName.endsWith('.tf')) {
             ErrorMsgP.textContent = 'Error: Please upload a .tgz file.';
             ErrorMsgP.style.color = 'red';
             fileInput.value = '';
         }
       }
-/*
-    if (!fileName.endsWith(".tgz")) {
-        errorMsgP.innerhtm = "You can only upload .tgz files.";
-        errorMsgP.style.color = "red";
-        uploadButton.disabled = true;
-    } else {
-        errorMsgP.textContent = "File accepted!";
-        errorMsgP.style.color = "green";
-        uploadButton.disabled = false;  
-    }
-*/
 });
+*/

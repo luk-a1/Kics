@@ -1,8 +1,13 @@
-from fastapi import FastAPI, UploadFile
+from fastapi import FastAPI, UploadFile, Request
+from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.templating import Jinja2Templates
 from kics_cmd import run_kics_command
+from urllib.parse import quote
 from pathlib import Path
 
-UploadDir = Path() / '/home/luka/KicsWeb/uploads'
+UploadDir = Path() / '/home/luk/Kics/uploads'
+OutputDir = Path() / '/home/luk/Kics/output'
+templates = Jinja2Templates(directory="templates")
 #print(UploadDir) #return uploads as a path
 app = FastAPI() 
 
@@ -20,8 +25,10 @@ async def create_upload_file(tgz_file: UploadFile):
     with open(save_path, "wb") as f:
         f.write(data)
 
-    # first it requires the directory of the file and after that the file name
-    command = f"docker run -t -v \"{UploadDir}:/path\" checkmarx/kics:latest scan -p /path/{fileName}"
-    return_code = run_kics_command(command)
-
-    return {"filename": tgz_file.filename}
+    # -v mapps the UploadDir to the container path
+    # -t is for TTY, which is needed for interactive commands
+    command = f"docker run --rm -t -v \"{UploadDir}:/path\" -v \"{OutputDir}:/output\" checkmarx/kics:latest scan -p /path/{fileName} -o /output"
+    run_kics_command(command)
+    command = f"rm {UploadDir}/{fileName}"
+    run_kics_command(command)
+    return
