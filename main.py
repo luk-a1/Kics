@@ -30,7 +30,7 @@ async def create_upload_file(tgz_file: UploadFile):
 
     # -v mapps the UploadDir to the container path
     # -t is for TTY, which is needed for interactive commands
-    command = f"docker run --rm -t -v \"{UploadDir}:/path\" -v \"{OutputDir}:/output\" checkmarx/kics:latest scan -p /path/{fileName} -o /output"
+    command = f"docker run --rm -t -v \"{UploadDir}:/path\" -v \"{OutputDir}:/output\" checkmarx/kics:latest scan -p /path/{fileName} -o /output --output-name {fileName}_result"
     run_kics_command(command)
 
     command = f"rm {UploadDir}/{fileName}"
